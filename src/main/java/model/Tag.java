@@ -15,6 +15,7 @@ public class Tag implements Serializable {
 	private static final long serialVersionUID = 4553122933740870265L;
 	private long id;
 	private String title;
+<<<<<<< HEAD
 	private Set<Post> posts;
 	
 	public Tag() {
@@ -49,4 +50,5 @@ public class Tag implements Serializable {
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
 	}
+
 }

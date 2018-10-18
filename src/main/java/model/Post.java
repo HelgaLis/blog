@@ -17,6 +17,7 @@ public class Post implements Serializable{
 	private Author author;
 	private String title;
 	private String text;
+<<<<<<< HEAD
 	private Set<Tag> tags;
 	
 	public Post() {
@@ -76,4 +77,5 @@ public class Post implements Serializable{
 	public String toString() {
 		return "Post - title: "+ title+" text: "+text; 
 	}
+
 }

@@ -16,7 +16,8 @@ import model.Tag;
 
 public class HibernateUtil {
     private static final String hibernate_show_sql = "true";
-    private static final String hibernate_hbm2ddl_auto = "validate";
+    private static final String hibernate_hbm2ddl_auto = "update";
+
     
     private final SessionFactory sessionFactory;
     

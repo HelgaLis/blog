@@ -1,5 +1,6 @@
 package main;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import db.service.Service;
@@ -19,6 +20,6 @@ public class Main {
 		dbService.addAuthor(au);
 		List<Author> authors = dbService.getAllAuthorWithPosts();
 		System.out.println(authors);
-	}
+
 
 }

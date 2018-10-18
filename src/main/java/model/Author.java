@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "authors")
+<<<<<<< HEAD
 @NamedQuery(name = "Author.findAllWithPosts",
 query = "select distinct a from Author a left join fetch a.posts p")
 @NamedQuery(name = "Author.findByName",
@@ -56,5 +57,5 @@ public class Author implements Serializable{
 	@Override
 	public String toString() {
 		return "Author - name:"+name+ " id: "+id;
-	}
+
 }

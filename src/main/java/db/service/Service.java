@@ -1,5 +1,6 @@
 package db.service;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +43,7 @@ public class Service {
 	public Post addPost(Post post) {
 		sessionFactory.openSession().saveOrUpdate(post);
 		return post;
+
 	}
 	public long addTag(Tag tag) {
 		return 0;
