@@ -43,9 +43,10 @@ public class Tag implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@ManyToMany
-	@JoinTable(name = "tag", joinColumns=@JoinColumn(name="tag_id"),
-	inverseJoinColumns=@JoinColumn(name="post_id"))
+	//@ManyToMany(cascade = { CascadeType.ALL })
+	//@JoinTable(name = "tag", joinColumns=@JoinColumn(name="tag_id"),
+	//inverseJoinColumns=@JoinColumn(name="post_id"))
+	@ManyToMany(mappedBy = "tags")
 	public Set<Post> getPosts() {
 		return posts;
 	}

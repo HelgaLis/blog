@@ -61,7 +61,7 @@ public class Post implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@ManyToMany
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "tag", joinColumns=@JoinColumn(name="post_id"),
 	inverseJoinColumns=@JoinColumn(name="tag_id"))
 	public Set<Tag> getTags() {
@@ -76,7 +76,7 @@ public class Post implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Post - title: "+ title+" text: "+text; 
+		return "Post - title: "+ title+" text: "+text+" author"+author; 
 	}
 
 }

@@ -45,8 +45,9 @@ public class Service {
 		return post;
 
 	}
-	public Post addTag(Tag tag) {
+	public Tag addTag(Tag tag) {
 		sessionFactory.openSession().saveOrUpdate(tag);
-		return post;
+		
+		return tag;
 	}
 }
