@@ -16,7 +16,7 @@ public class Main {
 		//au.addPost(p2);
 		Tag tag1 = new Tag("hobby");
 		Tag tag2 = new Tag("aroma");
-		Tag tag1 = new Tag("liby");
+		Tag tag3 = new Tag("liby");
 		
 		dbService.addAuthor(au);
 		List<Author> authors = dbService.getAllAuthorWithPosts();
