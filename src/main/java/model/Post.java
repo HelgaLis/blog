@@ -8,16 +8,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "posts")
+
 public class Post implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8916521594870346560L;
 	private long id;
 	private Author author;
 	private String title;
 	private String text;
-<<<<<<< HEAD
 	private Set<Tag> tags;
 	
 	public Post() {
@@ -72,6 +70,9 @@ public class Post implements Serializable{
 
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
+	}
+	public void addTag(Tag tag) {
+		tags.add(tag);
 	}
 	@Override
 	public String toString() {

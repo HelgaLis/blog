@@ -7,11 +7,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "authors")
-<<<<<<< HEAD
 @NamedQuery(name = "Author.findAllWithPosts",
 query = "select distinct a from Author a left join fetch a.posts p")
 @NamedQuery(name = "Author.findByName",
 query = "select distinct a from Author a left join fetch a.posts where a.name = :name")
+
 public class Author implements Serializable{
 	/**
 	 * 

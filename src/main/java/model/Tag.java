@@ -21,7 +21,10 @@ public class Tag implements Serializable {
 	public Tag() {
 		setPosts(new HashSet<>());
 	}
-	
+	public Tag(String title) {
+		this();
+		this.title = title;
+	}
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +52,9 @@ public class Tag implements Serializable {
 
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
+	}
+	public void addPost(Post post) {
+		posts.add(post);
 	}
 
 }
