@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		Service dbService = new Service();
 		Author au = new Author();
-		au.setName("Qura Maght9");
+		au.setName("Lilu");
 		Post p1 = new Post("First2","Ququ", au);
 		Post p2 = new Post("Second2", "Second", au);
 		au.addPost(p1);
@@ -32,6 +32,7 @@ public class Main {
 		dbService.addAuthor(au);
 		List<Author> authors = dbService.getAllAuthorWithPosts();
 		printAuthorWithDetails(authors);
+		dbService.deleteAuthor(au);
 	}
 	private static void printAuthorWithDetails(List<Author> author) {
 		author.stream().map(Author::getPosts).flatMap(posts->posts.stream()).forEach(System.out::println);

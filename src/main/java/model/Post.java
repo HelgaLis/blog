@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class Post implements Serializable{
 	private String title;
 	private String text;
 	private Set<Tag> tags;
+	private LocalDateTime timeStamp;
 	
 	public Post() {
 		setTags(new HashSet<>());
@@ -26,6 +28,7 @@ public class Post implements Serializable{
 		this.title = title;
 		this.text = text;
 		this.author = author;
+		this.setTimeStamp(LocalDateTime.now());
 	}
 	
 	@Id
@@ -61,6 +64,13 @@ public class Post implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Column(name="timestamp")
+	public LocalDateTime getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(LocalDateTime timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "tag", joinColumns=@JoinColumn(name="post_id"),
 	inverseJoinColumns=@JoinColumn(name="tag_id"))
@@ -76,7 +86,7 @@ public class Post implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Post - title: "+ title+" text: "+text+" author"+author; 
+		return "Post - title: "+ title+" text: "+text+" when: " + timeStamp+" author: "+author; 
 	}
 
 }
