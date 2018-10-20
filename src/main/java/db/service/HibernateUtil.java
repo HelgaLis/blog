@@ -4,12 +4,14 @@ package db.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.service.ServiceRegistry;
+
 import model.Author;
 import model.Post;
 import model.Tag;
@@ -20,10 +22,19 @@ public class HibernateUtil {
 
     
     private final SessionFactory sessionFactory;
+    private final static HibernateUtil instance = new HibernateUtil();
     
-    public HibernateUtil() {
+    private HibernateUtil() {
     	sessionFactory = createSessionFactory(getMySqlConfiguration());
+    	setValidTimeZone();
+    	printConnectInfo();
     	//sessionFactory = createSessionFactory(getH2Configuration());
+    }
+    private static HibernateUtil getInstance(){
+    	return instance;
+    }
+    public static Session getSession(){
+    	return getInstance().sessionFactory.openSession();
     }
     private Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();
@@ -63,11 +74,12 @@ public class HibernateUtil {
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
     }
-
-    public SessionFactory getSessionFactory() {
-    	return sessionFactory;
+    private void setValidTimeZone(){
+    	Session session = getSession();
+    	session.createNativeQuery("SET GLOBAL time_zone='+3:00'");
     }
-    public void printConnectInfo() {
+    
+    private void printConnectInfo() {
         try {
             SessionFactoryImpl sessionFactoryImpl = (SessionFactoryImpl) sessionFactory;
             Connection connection = sessionFactoryImpl.getSessionFactoryOptions().getServiceRegistry().getService(ConnectionProvider.class).getConnection();
