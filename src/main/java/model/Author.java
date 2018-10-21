@@ -24,10 +24,15 @@ public class Author implements Serializable{
 	private int age;
 	private Gender gender;
 	private Set<Post> posts;
-	public Author() {
+	private Author() {
 		posts = new HashSet<Post>();
 	}
-	
+	public Author(String name, int age, Gender gender){
+		this();
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+	}
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -18,7 +18,7 @@ import model.Author;
 import model.Post;
 import model.Tag;
 
-public class Service {
+public class BlogDao {
 	
 
 	@SuppressWarnings("unchecked")
