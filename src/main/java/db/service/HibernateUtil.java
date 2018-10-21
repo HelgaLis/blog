@@ -18,7 +18,7 @@ import model.Tag;
 
 public class HibernateUtil {
     private static final String hibernate_show_sql = "true";
-    private static final String hibernate_hbm2ddl_auto = "update";
+    private static final String hibernate_hbm2ddl_auto = "create";
 
     
     private final SessionFactory sessionFactory;
@@ -27,7 +27,7 @@ public class HibernateUtil {
     private HibernateUtil() {
     	sessionFactory = createSessionFactory(getMySqlConfiguration());
     	//setValidTimeZone();
-    	printConnectInfo();
+    	//printConnectInfo();
     	//sessionFactory = createSessionFactory(getH2Configuration());
     }
     private static HibernateUtil getInstance(){

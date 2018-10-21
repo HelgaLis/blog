@@ -21,10 +21,13 @@ import model.Tag;
 public class Service {
 	
 
+	@SuppressWarnings("unchecked")
 	public Author getAuthor(String name) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Author author = (Author) session.getNamedQuery("Author.findByName").setParameter("name", name).uniqueResult();
+
+		System.out.println("get");
 		tx.commit();
 		session.close();
 		return author;

@@ -1,6 +1,8 @@
 package model;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Check;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +21,8 @@ public class Author implements Serializable{
 	private static final long serialVersionUID = -3574776948427834074L;
 	private long id;
 	private String name;
+	private int age;
+	private Gender gender;
 	private Set<Post> posts;
 	public Author() {
 		posts = new HashSet<Post>();
@@ -43,6 +47,24 @@ public class Author implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Column(name="age")
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Column(name="gender", nullable=false)
+	@Enumerated(EnumType.STRING)
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Post> getPosts() {
 		return posts;
@@ -56,7 +78,7 @@ public class Author implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Author - name:"+name+ " id: "+id;
+		return "Author - name:"+name+" age: "+age+"gender: "+gender+" id: "+id;
 	}
 
 }
