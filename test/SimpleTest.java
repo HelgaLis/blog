@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import model.Author;
@@ -8,16 +10,20 @@ import model.Gender;
 import model.Post;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import db.service.BlogDao;
+import db.service.BlogService;
 
 
 
 public class SimpleTest {
 	private static final BlogDao db = new BlogDao();
-	private static final Set<Author> authors = new HashSet<>();
+	private static final BlogService service = new BlogService();
+	private static final List<Author> authors = new ArrayList<>();
 	
 	public SimpleTest(){
 		Author author1 = new Author("Bill Oclus",29, Gender.MALE);
@@ -38,11 +44,11 @@ public class SimpleTest {
 		
 	}
 	@Test
-	public void registerUser(Author author){
+	public void registerUser(){
 		Author actulAuthor = new Author("Kim12",29, Gender.MALE);
 		actulAuthor.setGender(Gender.MALE);
 		db.addAuthor(actulAuthor);
-		Author expectedAuthor = db.getAuthor("Kim12");
+		Author expectedAuthor = db.getAuthorByName("Kim12");
 		assertEquals(expectedAuthor.getId(), actulAuthor.getId());
 
 	}
@@ -52,12 +58,14 @@ public class SimpleTest {
 		actulAuthor.setGender(Gender.MALE);
 		db.addAuthor(actulAuthor);
 		db.deleteAuthor(actulAuthor);
-		assertEquals(null, db.getAuthor("Kim12"));
+		assertEquals(null, db.getAuthorByName("Kim12"));
 		
 	}
 	@Test
-	public Author getUserByName(String name){
-		return null;
+	public void getUserByName(){
+		Author expectedAuthor = authors.get(0);
+		Author actualAuthor = service.getUserByName(expectedAuthor.getName());
+		assertEquals(expectedAuthor.getId(), actualAuthor.getId());
 	}
 	@Test
 	public void updateUserInfo(){
@@ -65,10 +73,19 @@ public class SimpleTest {
 	}
 	@Test
 	public void getAllUser(){
-		
+		List<Author> users = service.getAllUser();
+		users.forEach(System.out::println);
+		assertEquals(4, users.size());
 	}
 	@Test
 	public void getPostByUser(){
-		
+		Author author = authors.get(0);
+		Post post = new Post("test", "test", author);
+		//author.addPost(post);
+		db.addAuthor(author);
+		db.addPost(post);
+		System.out.println(db.getAllPostsByAuthor(author.getName()));
+		assertEquals(author.getId(), post.getAuthor().getId());
+		db.deletePost(post);
 	}
 }

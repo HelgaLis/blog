@@ -2,32 +2,51 @@ package db.service;
 
 
 import java.util.List;
-import java.util.Set;
-
-import javax.transaction.Transactional;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
 
 //import org.hibernate.SessionFactory;
 
 
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import model.Author;
 import model.Post;
 import model.Tag;
 
 public class BlogDao {
-	
-
+	public <T> List<T> getList(Session session, Query<T> query){
+		Transaction tx = session.beginTransaction();
+		List<T> result = query.getResultList();
+		tx.commit();
+		session.close();
+		return result;
+	}
+	public <T> T getUniqueResult(Session session, Query<T> query){
+		Transaction tx = session.beginTransaction();
+		T result = query.uniqueResult();
+		tx.commit();
+		session.close();
+		return result;
+	}
+	public List<Author> getAllAuthor(Session session){
+		@SuppressWarnings("unchecked")
+		Query<Author> query = session.createQuery("from Author a");
+		List<Author> authors = getList(session,query);
+		return authors;
+	}
+	public Author getAuthorByName(Session session, String name){
+		@SuppressWarnings("unchecked")
+		Query<Author> query = session.getNamedQuery("Author.findByName").setParameter("name", name);
+		return getUniqueResult(session, query);
+	}
 	@SuppressWarnings("unchecked")
-	public Author getAuthor(String name) {
+	public Author getAuthorByName(String name) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Author author = (Author) session.getNamedQuery("Author.findByName").setParameter("name", name).uniqueResult();
-
-		System.out.println("get");
 		tx.commit();
 		session.close();
 		return author;
@@ -50,13 +69,16 @@ public class BlogDao {
 		session.close();
 		return authors;
 	}
-	public Set<Post> getAllPostsByAuthor(String name){
+	@SuppressWarnings("unchecked")
+	public List<Post> getAllPostsByAuthor(String name){
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		//TODO: add functionality
+		Author author = getAuthorByName(name);
+		List<Post> posts = session.createNamedQuery("Post.findAllPostByAuthor").setParameter("authorId", author.getId()).list();
+		
 		tx.commit();
 		session.close();
-		return null;
+		return posts;
 		
 	}
 	public Author addAuthor(Author author) {
@@ -89,6 +111,13 @@ public class BlogDao {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		session.delete(author);
+		tx.commit();
+		session.close();
+	}
+	public void deletePost(Post post){
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		session.delete(post);
 		tx.commit();
 		session.close();
 	}

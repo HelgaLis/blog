@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "posts")
-
+@NamedQuery(name = "Post.findAllPostByAuthor",
+query = "from Post where author_id = :authorId")
 public class Post implements Serializable{
 
 	private static final long serialVersionUID = 8916521594870346560L;
