@@ -21,6 +21,7 @@ public class Tag implements Serializable {
 	public Tag() {
 		setPosts(new HashSet<>());
 	}
+
 	public Tag(String title) {
 		this();
 		this.title = title;
@@ -60,7 +61,7 @@ public class Tag implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -72,7 +73,7 @@ public class Tag implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -102,6 +103,6 @@ public class Tag implements Serializable {
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 }

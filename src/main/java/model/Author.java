@@ -1,8 +1,5 @@
 package model;
 import javax.persistence.*;
-
-import org.hibernate.annotations.Check;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -88,7 +85,7 @@ public class Author implements Serializable{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -102,7 +99,7 @@ public class Author implements Serializable{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -138,6 +135,6 @@ public class Author implements Serializable{
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 }

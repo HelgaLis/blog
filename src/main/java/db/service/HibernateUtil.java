@@ -74,11 +74,7 @@ public class HibernateUtil {
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
     }
-    /*private void setValidTimeZone(){
-    	Session session = getSession();
-    	session.createNativeQuery("SET GLOBAL time_zone='+3:00'");
-    }*/
-    
+  
     private void printConnectInfo() {
         try {
             SessionFactoryImpl sessionFactoryImpl = (SessionFactoryImpl) sessionFactory;

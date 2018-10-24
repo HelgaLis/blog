@@ -72,8 +72,9 @@ public class Post implements Serializable{
 	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+	
 	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "tag", joinColumns=@JoinColumn(name="post_id"),
+	@JoinTable(name = "tagged", joinColumns=@JoinColumn(name="post_id"),
 	inverseJoinColumns=@JoinColumn(name="tag_id"))
 	public Set<Tag> getTags() {
 		return tags;
@@ -88,7 +89,7 @@ public class Post implements Serializable{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -104,7 +105,7 @@ public class Post implements Serializable{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -155,7 +156,7 @@ public class Post implements Serializable{
 			return false;
 		}
 		return true;
-	}
+	}*/
 	@Override
 	public String toString() {
 		return "Post - title: "+ title+" text: "+text+" when: " + timeStamp+" author: "+author; 
