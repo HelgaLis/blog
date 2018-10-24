@@ -85,5 +85,59 @@ public class Author implements Serializable{
 	public String toString() {
 		return "Author - name:"+name+" age: "+age+"gender: "+gender+" id: "+id;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + age;
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Author)) {
+			return false;
+		}
+		Author other = (Author) obj;
+		if (age != other.age) {
+			return false;
+		}
+		if (gender != other.gender) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		if (posts == null) {
+			if (other.posts != null) {
+				return false;
+			}
+		} else if (!posts.equals(other.posts)) {
+			return false;
+		}
+		return true;
+	}
 
 }

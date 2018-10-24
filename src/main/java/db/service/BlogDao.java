@@ -31,6 +31,19 @@ public class BlogDao {
 		session.close();
 		return result;
 	}
+	public <T> T saveOrUpdate(Session session,T object){
+		Transaction tx = session.beginTransaction();
+		session.saveOrUpdate(object);
+		tx.commit();
+		session.close();
+		return object;
+	}
+	public <T> void delete(Session session, T object){
+		Transaction tx = session.beginTransaction();
+		session.delete(object);
+		tx.commit();
+		session.close();
+	}
 	public List<Author> getAllAuthor(Session session){
 		@SuppressWarnings("unchecked")
 		Query<Author> query = session.createQuery("from Author a");
@@ -42,15 +55,7 @@ public class BlogDao {
 		Query<Author> query = session.getNamedQuery("Author.findByName").setParameter("name", name);
 		return getUniqueResult(session, query);
 	}
-	@SuppressWarnings("unchecked")
-	public Author getAuthorByName(String name) {
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		Author author = (Author) session.getNamedQuery("Author.findByName").setParameter("name", name).uniqueResult();
-		tx.commit();
-		session.close();
-		return author;
-	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Author> getAllAuthorWithPosts(){
 		Session session = HibernateUtil.getSession();
@@ -60,65 +65,8 @@ public class BlogDao {
 		session.close();
 		return authors;
 	}
-	@SuppressWarnings("unchecked")
-	public List<Author> getAllAuthor(){
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		List<Author> authors = session.createQuery("from Author a").list();
-		tx.commit();
-		session.close();
-		return authors;
-	}
-	@SuppressWarnings("unchecked")
-	public List<Post> getAllPostsByAuthor(String name){
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		Author author = getAuthorByName(name);
-		List<Post> posts = session.createNamedQuery("Post.findAllPostByAuthor").setParameter("authorId", author.getId()).list();
-		
-		tx.commit();
-		session.close();
-		return posts;
-		
-	}
-	public Author addAuthor(Author author) {
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(author);
-		tx.commit();
-		session.close();
-		return author;
-	}
-	public Post addPost(Post post) {
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(post);
-		tx.commit();
-		session.close();
-		return post;
 
-	}
-	public Tag addTag(Tag tag) {
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(tag);
-		tx.commit();
-		session.close();
-		return tag;
-	}
 	
-	public void deleteAuthor(Author author){
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.delete(author);
-		tx.commit();
-		session.close();
-	}
-	public void deletePost(Post post){
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.delete(post);
-		tx.commit();
-		session.close();
-	}
+
+
 }

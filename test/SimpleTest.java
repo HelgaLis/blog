@@ -21,44 +21,42 @@ import db.service.BlogService;
 
 
 public class SimpleTest {
-	private static final BlogDao db = new BlogDao();
 	private static final BlogService service = new BlogService();
 	private static final List<Author> authors = new ArrayList<>();
 	
-	public SimpleTest(){
+
+	@BeforeClass
+	public static void insertInitialDataToDB(){
 		Author author1 = new Author("Bill Oclus",29, Gender.MALE);
 		Author author2 = new Author("Loana Fay",25, Gender.FEMALE);
 		Author author3 = new Author("Pussy",4, Gender.UNDEFINED);
 		authors.add(author1);
 		authors.add(author2);
 		authors.add(author3);
+		authors.forEach(author->service.registerUser(author));
 	}
-
-	@Before
-	public void insertInitialDataToDB(){
-		authors.forEach(author->db.addAuthor(author));
-	}
-	@After
-	public void deleteInitialDataFromDB(){
-		authors.forEach(author->db.deleteAuthor(author));
+	@AfterClass
+	public static void deleteInitialDataFromDB(){
+		authors.forEach(author->service.deleteUser(author));
 		
 	}
 	@Test
 	public void registerUser(){
-		Author actulAuthor = new Author("Kim12",29, Gender.MALE);
+		Author actulAuthor = new Author("Kim13",29, Gender.MALE);
 		actulAuthor.setGender(Gender.MALE);
-		db.addAuthor(actulAuthor);
-		Author expectedAuthor = db.getAuthorByName("Kim12");
+		service.registerUser(actulAuthor);
+		Author expectedAuthor = service.getUserByName("Kim13");
 		assertEquals(expectedAuthor.getId(), actulAuthor.getId());
+		service.deleteUser(expectedAuthor);
 
 	}
 	@Test
 	public void deleteUser(){
-		Author actulAuthor = new Author("Kim12",29, Gender.MALE);
+		Author actulAuthor = new Author("Kim13",29, Gender.MALE);
 		actulAuthor.setGender(Gender.MALE);
-		db.addAuthor(actulAuthor);
-		db.deleteAuthor(actulAuthor);
-		assertEquals(null, db.getAuthorByName("Kim12"));
+		service.registerUser(actulAuthor);
+		service.deleteUser(actulAuthor);
+		assertEquals(null, service.getUserByName("Kim13"));
 		
 	}
 	@Test
@@ -69,7 +67,10 @@ public class SimpleTest {
 	}
 	@Test
 	public void updateUserInfo(){
-		
+		Author author = authors.get(0);
+		author.setName("John Dow");
+		service.updateUserInfo(author);
+		assertEquals("John Dow",author.getName());
 	}
 	@Test
 	public void getAllUser(){
@@ -82,10 +83,10 @@ public class SimpleTest {
 		Author author = authors.get(0);
 		Post post = new Post("test", "test", author);
 		//author.addPost(post);
-		db.addAuthor(author);
-		db.addPost(post);
-		System.out.println(db.getAllPostsByAuthor(author.getName()));
+		service.registerUser(author);
+		service.savePost(post);
+		System.out.println(service.getPostsByUser(author.getName()));
 		assertEquals(author.getId(), post.getAuthor().getId());
-		db.deletePost(post);
+		service.deletePost(post);
 	}
 }

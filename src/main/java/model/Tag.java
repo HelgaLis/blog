@@ -57,5 +57,51 @@ public class Tag implements Serializable {
 	public void addPost(Post post) {
 		posts.add(post);
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Tag)) {
+			return false;
+		}
+		Tag other = (Tag) obj;
+		if (id != other.id) {
+			return false;
+		}
+		if (posts == null) {
+			if (other.posts != null) {
+				return false;
+			}
+		} else if (!posts.equals(other.posts)) {
+			return false;
+		}
+		if (title == null) {
+			if (other.title != null) {
+				return false;
+			}
+		} else if (!title.equals(other.title)) {
+			return false;
+		}
+		return true;
+	}
 
 }

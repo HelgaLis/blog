@@ -10,18 +10,21 @@ import model.Post;
 
 public class BlogService {
 	private final BlogDao dao = new BlogDao();
-	public void registerUser(Author author){
-		
+	public Author registerUser(Author author){
+		Session session = HibernateUtil.getSession();
+		return dao.saveOrUpdate(session, author);
 	}
 	public void deleteUser(Author author){
-		
+		Session session = HibernateUtil.getSession();
+		dao.delete(session, author);
 	}
 	public Author getUserByName(String name){
 		Session session = HibernateUtil.getSession();
 		return dao.getAuthorByName(session, name);
 	}
-	public void updateUserInfo(){
-		
+	public Author updateUserInfo(Author author){
+		Session session = HibernateUtil.getSession();
+		return dao.saveOrUpdate(session, author);
 	}
 	public List<Author> getAllUser(){
 		
@@ -29,11 +32,18 @@ public class BlogService {
 		return dao.getAllAuthor(session);
 		
 	}
-	public Set<Post> getPostByUser(String name){
-		return null;
+	public Set<Post> getPostsByUser(String name){
+		Session session = HibernateUtil.getSession();
+		return dao.getAuthorByName(session, name).getPosts();
 	}
-	public void savePost(Post post){
+	public Post savePost(Post post){
+		Session session = HibernateUtil.getSession();
+		return dao.saveOrUpdate(session, post);
 		
+	}
+	public void deletePost(Post post){
+		Session session = HibernateUtil.getSession();
+		dao.delete(session, post);
 	}
 	
 }
