@@ -1,5 +1,6 @@
 package model;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +24,7 @@ public class Author implements Serializable{
 	private String name;
 	private int age;
 	private Gender gender;
+	private String email;
 	private Set<Post> posts;
 	private Author() {
 		posts = new HashSet<Post>();
@@ -141,5 +143,13 @@ public class Author implements Serializable{
 		}
 		return true;
 	}*/
+	@Column(name="email")
+	@Email
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }
