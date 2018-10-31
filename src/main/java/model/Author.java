@@ -1,5 +1,8 @@
 package model;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +45,7 @@ public class Author implements Serializable{
 	}
 
 	@Column(name = "name", unique = true)
+	@NotNull
 	public String getName() {
 		return name;
 	}
@@ -50,6 +54,7 @@ public class Author implements Serializable{
 		this.name = name;
 	}
 	@Column(name="age")
+	@Min(13)
 	public int getAge() {
 		return age;
 	}
