@@ -4,13 +4,21 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import model.Author;
 import model.Post;
 import model.Tag;
-
+@Service
 public class BlogService {
-	private final BlogDao dao = new BlogDao();
+	private BlogDao dao;
+	public BlogService(BlogDao dao){
+		this.dao = dao;
+	}
+	public List<Author> getAllUserTest(){
+		return dao.getAllAuthorTest();
+	}
 	public Author registerUser(Author author){
 		Session session = HibernateUtil.getSession();
 		return dao.saveOrUpdate(session, author);

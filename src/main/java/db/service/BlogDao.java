@@ -9,6 +9,7 @@ import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
 
 
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -17,6 +18,18 @@ import model.Post;
 import model.Tag;
 
 public class BlogDao {
+	private SessionFactory sessionFactory;
+	public BlogDao(SessionFactory sessionFactory){
+		this.sessionFactory = sessionFactory;
+	}
+	//test
+	public List<Author> getAllAuthorTest(){
+		Session session = sessionFactory.openSession();
+		@SuppressWarnings("unchecked")
+		Query<Author> query = session.createQuery("from Author a");
+		List<Author> authors = getList(session,query);
+		return authors;
+	}
 	public <T> List<T> getList(Session session, Query<T> query){
 		Transaction tx = session.beginTransaction();
 		List<T> result = query.getResultList();
