@@ -1,4 +1,4 @@
-package db.service;
+package service;
 
 import java.util.List;
 import java.util.Set;
@@ -7,17 +7,19 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.SimpleHibernateSessionBlogDao;
+import db.service.HibernateUtil;
 import model.Author;
 import model.Post;
 import model.Tag;
 @Service
-public class BlogService {
-	private BlogDao dao;
-	public BlogService(BlogDao dao){
+public class SimpleHibernateBlogService {
+	private SimpleHibernateSessionBlogDao dao;
+	public SimpleHibernateBlogService(SimpleHibernateSessionBlogDao dao){
 		this.dao = dao;
 	}
 	public List<Author> getAllUserTest(){
-		return dao.getAllAuthorTest();
+		return dao.getAllAuthor();
 	}
 	public Author registerUser(Author author){
 		Session session = HibernateUtil.getSession();
@@ -28,22 +30,19 @@ public class BlogService {
 		dao.delete(session, author);
 	}
 	public Author getUserByName(String name){
-		Session session = HibernateUtil.getSession();
-		return dao.getAuthorByName(session, name);
+		return dao.getAuthorByName(name);
 	}
 	public Author updateUserInfo(Author author){
 		Session session = HibernateUtil.getSession();
 		return dao.saveOrUpdate(session, author);
 	}
 	public List<Author> getAllUser(){
-		
-		Session session = HibernateUtil.getSession();
-		return dao.getAllAuthor(session);
+		return dao.getAllAuthor();
 		
 	}
 	public Set<Post> getPostsByUser(String name){
-		Session session = HibernateUtil.getSession();
-		return dao.getAuthorByName(session, name).getPosts();
+	
+		return dao.getAuthorByName(name).getPosts();
 	}
 	public Post savePost(Post post){
 		Session session = HibernateUtil.getSession();

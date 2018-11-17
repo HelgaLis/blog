@@ -2,7 +2,7 @@ package main;
 
 import java.util.List;
 
-import db.service.BlogDao;
+import dao.SimpleHibernateSessionBlogDao;
 import model.*;
 public class Main {
 

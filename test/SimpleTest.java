@@ -16,13 +16,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import db.service.BlogDao;
-import db.service.BlogService;
+import service.SimpleHibernateBlogService;
+import dao.SimpleHibernateSessionBlogDao;
 
 
 
 public class SimpleTest {
-	private static final BlogService service = new BlogService();
+	private static final SimpleHibernateBlogService service = new SimpleHibernateBlogService(new SimpleHibernateSessionBlogDao());
 	private static final List<Author> authors = new ArrayList<>();
 	private static final List<Tag> tags = new ArrayList<>();
 	

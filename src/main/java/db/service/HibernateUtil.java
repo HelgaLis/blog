@@ -34,7 +34,7 @@ public class HibernateUtil {
     	return instance;
     }
     public static Session getSession(){
-    	return getInstance().sessionFactory.openSession();
+    	return getInstance().sessionFactory.getCurrentSession();
     }
     private Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();

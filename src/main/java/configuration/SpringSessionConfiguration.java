@@ -1,4 +1,4 @@
-package db.service;
+package configuration;
 
 import java.util.Properties;
 
@@ -13,15 +13,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
+import service.SimpleHibernateBlogService;
+import dao.BlogDao;
+import dao.SimpleHibernateSessionBlogDao;
+import dao.SpringHibernateSessionBlogDao;
+
 @Configuration
 public class SpringSessionConfiguration {
 	@Bean
 	public BlogDao blogDao(SessionFactory sessionFactory){
-		return new BlogDao(sessionFactory);
+		return new SpringHibernateSessionBlogDao(sessionFactory);
 	}
 	@Bean
-	public BlogService blogService(BlogDao blogDao){
-		return new BlogService(blogDao);
+	public SimpleHibernateBlogService simpleHibernateBlogService(SimpleHibernateSessionBlogDao simpleHibernateSessionBlogDao){
+		return new SimpleHibernateBlogService(simpleHibernateSessionBlogDao);
 	}
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
