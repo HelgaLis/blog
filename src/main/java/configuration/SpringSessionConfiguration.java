@@ -11,22 +11,31 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import service.BlogService;
 import service.SimpleHibernateBlogService;
+import service.SpringHibernateBlogService;
 import dao.BlogDao;
 import dao.SimpleHibernateSessionBlogDao;
 import dao.SpringHibernateSessionBlogDao;
 
 @Configuration
+@EnableTransactionManagement
 public class SpringSessionConfiguration {
 	@Bean
 	public BlogDao blogDao(SessionFactory sessionFactory){
 		return new SpringHibernateSessionBlogDao(sessionFactory);
 	}
 	@Bean
-	public SimpleHibernateBlogService simpleHibernateBlogService(SimpleHibernateSessionBlogDao simpleHibernateSessionBlogDao){
-		return new SimpleHibernateBlogService(simpleHibernateSessionBlogDao);
+	public BlogService simpleHibernateBlogService(SimpleHibernateSessionBlogDao simpleHibernateSessionBlogDao){
+		return new SpringHibernateBlogService(simpleHibernateSessionBlogDao);
+	}
+	@Bean
+	public HibernateTransactionManager hibernateTransactionalManager(SessionFactory sessionFactory){
+		return new HibernateTransactionManager(sessionFactory);
 	}
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
