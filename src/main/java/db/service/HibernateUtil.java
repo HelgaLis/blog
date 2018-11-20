@@ -34,7 +34,7 @@ public class HibernateUtil {
     	return instance;
     }
     public static Session getSession(){
-    	return getInstance().sessionFactory.openSession();
+    	return getInstance().sessionFactory.getCurrentSession();
     }
     private Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();
@@ -59,7 +59,7 @@ public class HibernateUtil {
         return configuration.buildSessionFactory(serviceRegistry);
     }
     
-    private Configuration getH2Configuration() {
+  /*  private Configuration getH2Configuration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Author.class);
         configuration.addAnnotatedClass(Post.class);
@@ -73,7 +73,7 @@ public class HibernateUtil {
         configuration.setProperty("hibernate.show_sql", hibernate_show_sql);
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
-    }
+    }*/
   
     private void printConnectInfo() {
         try {
