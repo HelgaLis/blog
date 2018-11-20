@@ -12,9 +12,9 @@ import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.service.ServiceRegistry;
 
-import model.Author;
-import model.Post;
-import model.Tag;
+import blog.model.Author;
+import blog.model.Post;
+import blog.model.Tag;
 
 public class HibernateUtil {
     private static final String hibernate_show_sql = "true";

@@ -1,4 +1,4 @@
-package dao;
+package blog.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.Map;
 
 import javax.persistence.NamedQuery;
 
-import model.Author;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import blog.model.Author;
 
 @Repository
 @Transactional

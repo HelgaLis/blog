@@ -5,19 +5,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import model.Author;
-import model.Gender;
-import model.Post;
-import model.Tag;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import service.SimpleHibernateBlogService;
-import dao.SimpleHibernateSessionBlogDao;
+import blog.dao.SimpleHibernateSessionBlogDao;
+import blog.model.Author;
+import blog.model.Gender;
+import blog.model.Post;
+import blog.model.Tag;
+import blog.service.SimpleHibernateBlogService;
 
 
 

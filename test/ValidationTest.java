@@ -7,11 +7,11 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import model.Author;
-import model.Gender;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import blog.model.Author;
+import blog.model.Gender;
 
 
 public class ValidationTest {

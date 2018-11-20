@@ -1,4 +1,4 @@
-package service;
+package blog.service;
 
 import java.util.List;
 import java.util.Set;
@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dao.SimpleHibernateSessionBlogDao;
+import blog.dao.SimpleHibernateSessionBlogDao;
+import blog.model.Author;
+import blog.model.Post;
+import blog.model.Tag;
 import db.service.HibernateUtil;
-import model.Author;
-import model.Post;
-import model.Tag;
 @Service
 public class SimpleHibernateBlogService {
 	private SimpleHibernateSessionBlogDao dao;

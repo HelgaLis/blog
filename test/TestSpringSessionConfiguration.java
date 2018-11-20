@@ -3,15 +3,15 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import service.BlogService;
-import service.SimpleHibernateBlogService;
-import service.SpringHibernateBlogService;
-import configuration.SpringSessionConfiguration;
-import dao.BlogDao;
-import dao.SimpleHibernateSessionBlogDao;
-import dao.SpringHibernateSessionBlogDao;
-import model.Author;
-import model.Gender;
+import blog.configuration.SpringSessionConfiguration;
+import blog.dao.BlogDao;
+import blog.dao.SimpleHibernateSessionBlogDao;
+import blog.dao.SpringHibernateSessionBlogDao;
+import blog.model.Author;
+import blog.model.Gender;
+import blog.service.BlogService;
+import blog.service.SimpleHibernateBlogService;
+import blog.service.SpringHibernateBlogService;
 
 public class TestSpringSessionConfiguration {
 	private static BlogService service;

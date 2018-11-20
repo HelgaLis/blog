@@ -1,8 +1,7 @@
-import model.Author;
-import model.Gender;
-
 import org.junit.Test;
 
+import blog.model.Author;
+import blog.model.Gender;
 import db.service.JpaPersistenceDaoSample;
 
 

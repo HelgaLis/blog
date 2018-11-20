@@ -1,11 +1,11 @@
-package service;
+package blog.service;
 
 import java.util.List;
 import java.util.Set;
 
-import model.Author;
-import model.Post;
-import model.Tag;
+import blog.model.Author;
+import blog.model.Post;
+import blog.model.Tag;
 
 public interface BlogService {
 	public List<Author> getAllUser();

@@ -2,8 +2,8 @@ package main;
 
 import java.util.List;
 
-import dao.SimpleHibernateSessionBlogDao;
-import model.*;
+import blog.dao.SimpleHibernateSessionBlogDao;
+import blog.model.*;
 public class Main {
 
 	public static void main(String[] args) {

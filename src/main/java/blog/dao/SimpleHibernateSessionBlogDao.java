@@ -1,4 +1,4 @@
-package dao;
+package blog.dao;
 
 
 import java.util.List;
@@ -13,10 +13,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import blog.model.Author;
+import blog.model.Post;
+import blog.model.Tag;
 import db.service.HibernateUtil;
-import model.Author;
-import model.Post;
-import model.Tag;
 
 public class SimpleHibernateSessionBlogDao implements BlogDao {
 	private final Session session;

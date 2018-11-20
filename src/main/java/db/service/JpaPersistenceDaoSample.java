@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import model.Author;
+import blog.model.Author;
 
 public class JpaPersistenceDaoSample {
 	private javax.persistence.EntityManagerFactory emf;

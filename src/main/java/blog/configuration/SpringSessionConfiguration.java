@@ -1,13 +1,9 @@
-package configuration;
+package blog.configuration;
 
 import java.util.Properties;
 
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.*;
-
-import model.Author;
-import model.Post;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +12,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import service.BlogService;
-import service.SpringHibernateBlogService;
-import dao.BlogDao;
-import dao.SpringHibernateSessionBlogDao;
+import blog.dao.BlogDao;
+import blog.dao.SpringHibernateSessionBlogDao;
+import blog.model.Author;
+import blog.model.Post;
+import blog.service.BlogService;
+import blog.service.SpringHibernateBlogService;
 
 @Configuration
 @EnableTransactionManagement
@@ -41,7 +39,7 @@ public class SpringSessionConfiguration {
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
         sessionFactoryBean.setHibernateProperties(hibernateProperties());
-        sessionFactoryBean.setAnnotatedClasses(Author.class, Post.class, model.Tag.class);
+        sessionFactoryBean.setAnnotatedClasses(Author.class, Post.class, blog.model.Tag.class);
         return sessionFactoryBean;
     }
     @Bean

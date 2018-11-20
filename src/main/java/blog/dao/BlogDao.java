@@ -1,8 +1,8 @@
-package dao;
+package blog.dao;
 
 import java.util.List;
 
-import model.Author;
+import blog.model.Author;
 
 public interface BlogDao {
 	public List<Author> getAllAuthor();
