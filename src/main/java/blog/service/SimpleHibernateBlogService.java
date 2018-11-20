@@ -12,7 +12,6 @@ import blog.model.Author;
 import blog.model.Post;
 import blog.model.Tag;
 import db.service.HibernateUtil;
-@Service
 public class SimpleHibernateBlogService {
 	private SimpleHibernateSessionBlogDao dao;
 	public SimpleHibernateBlogService(SimpleHibernateSessionBlogDao dao){

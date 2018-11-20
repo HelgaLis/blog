@@ -27,8 +27,8 @@ public class SpringSessionConfiguration {
 		return new SpringHibernateSessionBlogDao(sessionFactory);
 	}
 	@Bean
-	public BlogService springHibernateBlogService(BlogDao simpleHibernateSessionBlogDao){
-		return new SpringHibernateBlogService(simpleHibernateSessionBlogDao);
+	public BlogService springHibernateBlogService(BlogDao springHibernateSessionBlogDao){
+		return new SpringHibernateBlogService(springHibernateSessionBlogDao);
 	}
 	@Bean
 	public HibernateTransactionManager hibernateTransactionalManager(SessionFactory sessionFactory){

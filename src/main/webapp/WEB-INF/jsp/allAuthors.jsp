@@ -9,11 +9,12 @@
 </head>
 <body>
 <div>
-<c:forEach var="au" items="${authors}"></c:forEach>
+<c:forEach var="au" items="${authors}">
 <p>${au.id}</p>
 <p>${au.name}</p>
 <p>${au.age}</p>
 <p>${au.gender}</p>
+</c:forEach>
 </div>
 </body>
 </html>

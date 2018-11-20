@@ -18,7 +18,7 @@ import blog.model.Post;
 import blog.model.Tag;
 import db.service.HibernateUtil;
 
-public class SimpleHibernateSessionBlogDao implements BlogDao {
+public class SimpleHibernateSessionBlogDao  {
 	private final Session session;
 	public SimpleHibernateSessionBlogDao(){
 		this.session = HibernateUtil.getSession();
@@ -82,7 +82,7 @@ public class SimpleHibernateSessionBlogDao implements BlogDao {
 
 
 
-	@Override
+/*	@Override
 	public <T> T saveOrUpdate(T object) {
 		// TODO Auto-generated method stub
 		return null;
@@ -94,7 +94,7 @@ public class SimpleHibernateSessionBlogDao implements BlogDao {
 	public <T> void delete(T object) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 
 }

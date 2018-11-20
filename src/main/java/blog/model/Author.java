@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "authors")
 @NamedQuery(name = "Author.findAllWithPosts",
-query = "select distinct a from Author a left join fetch a.posts p")
+query = "select distinct a from Author a left join  a.posts p")
 @NamedQuery(name = "Author.findByName",
 query = "select distinct a from Author a left join fetch a.posts where a.name = :name")
 @NamedQuery(name="Author.findAll", query="from Author a")
@@ -26,7 +26,7 @@ public class Author implements Serializable{
 	private Gender gender;
 	private String email;
 	private Set<Post> posts;
-	private Author() {
+	public Author() {
 		posts = new HashSet<Post>();
 	}
 	public Author(String name, int age, Gender gender){
