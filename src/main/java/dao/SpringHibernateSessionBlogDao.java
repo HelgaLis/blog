@@ -15,18 +15,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@NamedQuery(name = "Author.findAllWithPosts",
-query = "select distinct a from Author a left join fetch a.posts p")
-@NamedQuery(name = "Author.findByName",
-query = "select distinct a from Author a left join fetch a.posts where a.name = :name")
-@NamedQuery(name="Author.findAll", query="from Author a")
+@Transactional
+
 public class SpringHibernateSessionBlogDao implements BlogDao{
 	private final SessionFactory sessionFactory;
 	public SpringHibernateSessionBlogDao (SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
-	}
-	private Session getCurrentSession(){
-		return sessionFactory.getCurrentSession();
 	}
 	@Override
 	public List<Author> getAllAuthor(){
@@ -50,7 +44,7 @@ public class SpringHibernateSessionBlogDao implements BlogDao{
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public <T> List<T> getList(String queryName, Map<String, Object> params){
-		Session session = getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query<T> query = session.getNamedQuery(queryName);
 		params.entrySet().stream().forEach(e->query.setParameter(e.getKey(), e.getValue()));
 		return query.getResultList();
@@ -58,7 +52,7 @@ public class SpringHibernateSessionBlogDao implements BlogDao{
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public  <T> T getUniqueResult(String queryName, Map<String, Object> params){
-		Session session = getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query<T> query = session.getNamedQuery(queryName);
 		params.entrySet().stream().forEach(e->query.setParameter(e.getKey(), e.getValue()));
 		return (T) query.uniqueResult();

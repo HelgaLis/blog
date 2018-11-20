@@ -3,11 +3,15 @@ package service;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import dao.BlogDao;
 import model.Author;
 import model.Post;
 import model.Tag;
-
+@Service
+@Transactional
 public class SpringHibernateBlogService implements BlogService {
 	private final BlogDao blogdao; 
 	public SpringHibernateBlogService(BlogDao blogDao) {
