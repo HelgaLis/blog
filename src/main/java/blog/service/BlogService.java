@@ -18,4 +18,5 @@ public interface BlogService {
 	public void deletePost(Post post);
 	public Tag saveTag(Tag tag);
 	public void deleteTag(Tag tag);
+	public Author findAuthorById(long id);
 }

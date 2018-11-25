@@ -70,5 +70,9 @@ public class SpringHibernateBlogService implements BlogService {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public Author findAuthorById(long id) {
+		return blogdao.getAuthorById(id);
+	}
 
 }

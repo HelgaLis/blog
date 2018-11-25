@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import blog.exception.AuthorNotFoundException;
 import blog.model.Author;
 
 @Repository
@@ -67,6 +68,18 @@ public class SpringHibernateSessionBlogDao implements BlogDao{
 	public  <T> void delete(T object){
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(object);
+	}
+	
+
+	@Override
+	@Transactional(readOnly=true)
+	public Author getAuthorById(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		Author author = session.get(Author.class, id);
+		if(author!=null)
+			return author;
+		else
+			throw new AuthorNotFoundException(id);
 	}
 
 }

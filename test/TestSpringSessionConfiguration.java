@@ -30,4 +30,14 @@ public class TestSpringSessionConfiguration {
 	public void getAllAuthors() {
 		service.getAllUser().forEach(System.out::println);
 	}
+	
+	@Test
+	public void getAuthorbyId(){
+		Author newAuthor = new Author("Kozma Firsof", 49, Gender.MALE);
+		service.registerUser(newAuthor);
+		long id = newAuthor.getId();
+		Author foundAuthor = service.findAuthorById(id);
+		System.out.println(newAuthor);
+		System.out.println(foundAuthor);
+	}
 }
